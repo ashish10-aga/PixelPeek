@@ -244,6 +244,7 @@ function GameBoard() {
 
       if (validation.isValid) {
         // CORRECT ANSWER
+        analyticsService.trackGuessAttempt(state.guess, true);
         analyticsService.trackGameScore(state.score, true, state.hintLevel, state.label);
 
         dispatch({ type: GAME_ACTIONS.REVEAL_ANSWER });

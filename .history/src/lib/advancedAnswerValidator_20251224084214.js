@@ -67,6 +67,53 @@ function fuzzyMatchScore(guess, answer) {
   return 1 - distance / maxLen;
 }
 
+/**
+ * Extract key entities and descriptors from text using Gemini
+ */
+async function extractEntities(text) {
+  try {
+    const prompt = `Extract the key nouns, adjectives, and entities from this text. Return as a JSON object with "entities" array and "descriptors" array. Be concise:
+Text: "${text}"
+
+Example response format:
+{"entities": ["bread", "egg"], "descriptors": ["brown", "white", "pastry"]}
+
+Response:`;
+
+    // Note: This is a simplified extraction - in production use Gemini with structured output
+    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-goog-api-key": import.meta.env.VITE_GEMINI_API_KEY,
+      },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+      }),
+    });
+
+    if (!response.ok) {
+      console.warn("Entity extraction failed, using fallback");
+      return { entities: tokenizeAndNormalize(text), descriptors: [] };
+    }
+
+    const data = await response.json();
+    const content = data?.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+    
+    try {
+      const parsed = JSON.parse(content);
+      return {
+        entities: parsed.entities || tokenizeAndNormalize(text),
+        descriptors: parsed.descriptors || [],
+      };
+    } catch {
+      return { entities: tokenizeAndNormalize(text), descriptors: [] };
+    }
+  } catch (err) {
+    console.warn("Entity extraction error:", err);
+    return { entities: tokenizeAndNormalize(text), descriptors: [] };
+  }
+}
 
 /**
  * Validate answer using multiple strategies with STRICT thresholds

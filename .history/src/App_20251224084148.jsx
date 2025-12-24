@@ -171,22 +171,22 @@ function GameBoard() {
       dispatch({ type: GAME_ACTIONS.SET_LABEL, payload: category });
       dispatch({ type: GAME_ACTIONS.SET_HINT, payload: "> Scanning image..." });
 
-      // Generate first hint asynchronously - MUST complete before setting loading to false
+      // Generate first hint asynchronously
       try {
         const firstHint = await generateHintFromAI(imageData.description, 0, [], category);
         dispatch({ type: GAME_ACTIONS.SET_HINT, payload: "> " + firstHint });
       } catch (e) {
         console.error("Hint generation failed:", e);
         dispatch({ type: GAME_ACTIONS.SET_HINT, payload: `> ERROR: ${e.message}` });
-      } finally {
-        // Set loading to false AFTER hint attempt (success or failure)
-        dispatch({ type: GAME_ACTIONS.SET_LOADING, payload: false });
-        // Preload next batch of images in background
-        preloadImages(CATEGORIES, 3).catch((err) => console.warn("Preload error:", err));
       }
+
+      dispatch({ type: GAME_ACTIONS.SET_LOADING, payload: false });
+
+      // Preload next batch of images in background
+      preloadImages(CATEGORIES, 3).catch((err) => console.warn("Preload error:", err));
     } catch (err) {
       console.error("Load image error:", err);
-      dispatch({ type: GAME_ACTIONS.SET_HINT, payload: `> ERROR: Unable to load image` });
+      dispatch({ type: GAME_ACTIONS.SET_HINT, payload: "> ERROR: Unable to load" });
       dispatch({ type: GAME_ACTIONS.SET_LOADING, payload: false });
     }
   }, [dispatch]);
@@ -244,6 +244,7 @@ function GameBoard() {
 
       if (validation.isValid) {
         // CORRECT ANSWER
+        analyticsService.trackGuessAttempt(state.guess, true);
         analyticsService.trackGameScore(state.score, true, state.hintLevel, state.label);
 
         dispatch({ type: GAME_ACTIONS.REVEAL_ANSWER });
