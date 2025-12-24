@@ -1,0 +1,247 @@
+/**
+ * PixelPeek Minimal Mystery Theme
+ * Clean, modern design with subtle depth and contemporary typography.
+ * 
+ * VISUAL IDENTITY:
+ * - Deep blue-dark gradient background
+ * - Soft green accent (#00ff9a)
+ * - Glassmorphism panels with backdrop blur
+ * - Soft rounded corners
+ * - Modern sans-serif fonts (Inter, system-ui)
+ * - Subtle shadows and glows
+ * - No animations or heavy effects
+ */
+
+html[data-theme="minimal"] {
+  --bg: linear-gradient(180deg, #071018 0%, #0b0f12 100%);
+  --panel-bg: rgba(10, 12, 14, 0.56);
+  --accent: #00ff9a;
+  --muted: rgba(255, 255, 255, 0.4);
+  --panel-radius: 12px;
+  --panel-border-width: 1px;
+  --panel-border-color: rgba(255, 255, 255, 0.04);
+  --panel-glow: 0 10px 30px rgba(0, 255, 154, 0.06);
+  --image-blur: 12px;
+  --image-frame-padding: 8px;
+  --image-rendering: auto;
+  --font-family: Inter, system-ui, -apple-system, sans-serif;
+  --score-font: 'Press Start 2P', monospace;
+  --transition-speed: 0.3s;
+}
+
+html[data-theme="minimal"] body {
+  background: var(--bg);
+  font-family: var(--font-family);
+  color: #fff;
+}
+
+html[data-theme="minimal"] .app-header {
+  background: rgba(10, 12, 14, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+html[data-theme="minimal"] .pixel-title {
+  font-size: 2.5rem;
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(0, 255, 154, 0.2);
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  transform: none;
+}
+
+@media (max-width: 1024px) {
+  html[data-theme="minimal"] .pixel-title {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+}
+
+@media (max-width: 640px) {
+  html[data-theme="minimal"] .pixel-title {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+}
+
+html[data-theme="minimal"] .shiny-score {
+  color: var(--accent);
+  font-size: 1.8rem;
+  text-shadow: 0 0 12px rgba(0, 255, 154, 0.3);
+  font-weight: 700;
+}
+
+html[data-theme="minimal"] .game-image-container {
+  border: 3px solid var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 255, 154, 0.08);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+html[data-theme="minimal"] .game-image-container img {
+  border-radius: 5px;
+}
+
+html[data-theme="minimal"] .hint-panel {
+  background: rgba(10, 12, 14, 0.6);
+  border: 1px solid rgba(0, 255, 154, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 255, 154, 0.04);
+  backdrop-filter: blur(6px);
+  padding: 24px;
+  max-width: 380px;
+}
+
+@media (max-width: 1023px) {
+  html[data-theme="minimal"] .hint-panel {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+html[data-theme="minimal"] .hint-label {
+  font-family: var(--font-family);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(0, 255, 154, 0.2);
+  margin-bottom: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+html[data-theme="minimal"] .hint-text {
+  font-family: var(--font-family);
+  font-size: 13px;
+  color: #fff;
+  line-height: 1.6;
+  word-wrap: break-word;
+  font-weight: 400;
+  text-shadow: none;
+}
+
+html[data-theme="minimal"] .retro-btn {
+  font-family: var(--font-family);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  background: rgba(0, 255, 154, 0.1);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 12px;
+  box-shadow: none;
+  text-shadow: none;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+html[data-theme="minimal"] .retro-btn:hover {
+  background: rgba(0, 255, 154, 0.15);
+  border-color: var(--accent);
+  transform: none;
+  box-shadow: 0 4px 12px rgba(0, 255, 154, 0.1);
+}
+
+html[data-theme="minimal"] .retro-btn:active {
+  background: rgba(0, 255, 154, 0.2);
+  transform: scale(0.98);
+  border-style: solid;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="minimal"] .retro-btn-red {
+  background: rgba(255, 80, 80, 0.12);
+  color: #ff6b6b;
+  border-color: rgba(255, 107, 107, 0.2);
+}
+
+html[data-theme="minimal"] .retro-btn-red:hover {
+  background: rgba(255, 80, 80, 0.18);
+  border-color: #ff6b6b;
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.1);
+}
+
+html[data-theme="minimal"] .retro-btn-blue {
+  background: rgba(100, 180, 255, 0.12);
+  color: #64b4ff;
+  border-color: rgba(100, 180, 255, 0.2);
+}
+
+html[data-theme="minimal"] .retro-btn-blue:hover {
+  background: rgba(100, 180, 255, 0.18);
+  border-color: #64b4ff;
+  box-shadow: 0 4px 12px rgba(100, 180, 255, 0.1);
+}
+
+html[data-theme="minimal"] .retro-btn-green {
+  background: rgba(0, 255, 154, 0.15);
+  color: var(--accent);
+  border-color: rgba(0, 255, 154, 0.3);
+  font-weight: bold;
+}
+
+html[data-theme="minimal"] .retro-btn-green:hover {
+  background: rgba(0, 255, 154, 0.22);
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 255, 154, 0.15);
+}
+
+html[data-theme="minimal"] .guess-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 255, 154, 0.2);
+  color: var(--accent);
+  font-family: var(--font-family);
+  font-size: 13px;
+  border-radius: 6px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  text-shadow: none;
+}
+
+html[data-theme="minimal"] .guess-input:focus {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1),
+              0 0 12px rgba(0, 255, 154, 0.15);
+}
+
+html[data-theme="minimal"] .guess-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+html[data-theme="minimal"] .attempts-counter {
+  font-family: var(--font-family);
+  font-size: 12px;
+  color: var(--accent);
+  text-shadow: none;
+  font-weight: 600;
+}
+
+html[data-theme="minimal"] .progress-bar {
+  background-color: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+}
+
+html[data-theme="minimal"] .progress-fill {
+  background: linear-gradient(90deg, var(--accent), #00e599);
+}
+
+html[data-theme="minimal"] .progress-fill.danger {
+  background: linear-gradient(90deg, #ff6b6b, #ff5555);
+}
+
+html[data-theme="minimal"] .answer-reveal {
+  background: rgba(10, 12, 14, 0.7);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--font-family);
+  font-size: 18px;
+  text-shadow: 0 0 8px rgba(0, 255, 154, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 255, 154, 0.08);
+  letter-spacing: 1px;
+  border-radius: 8px;
+  font-weight: 700;
+}

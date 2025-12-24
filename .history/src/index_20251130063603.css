@@ -1,0 +1,574 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* ========== RESET & GLOBAL ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: white;
+  font-family: 'Press Start 2P', monospace;
+  overflow: hidden;
+}
+
+/* ========== APP CONTAINER ========== */
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========== STARFIELD BACKGROUND ========== */
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.starfield canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ========== HEADER ========== */
+.app-header {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  border-bottom: 3px solid #FFD700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  flex-shrink: 0;
+  min-height: 100px;
+  gap: 20px;
+}
+
+.header-spacer {
+  width: 200px;
+  flex-shrink: 0;
+}
+
+/* ========== PIXEL TITLE ========== */
+.pixel-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 3rem;
+  color: #FF1493;
+  font-weight: bold;
+  text-shadow: 
+    4px 4px 0 #FF1493,
+    8px 8px 0 #00FFFF,
+    -2px -2px 0 #FFFFFF,
+    0 0 20px rgba(255, 20, 147, 0.8),
+    0 0 40px rgba(0, 255, 255, 0.6);
+  transform: skewY(-5deg);
+  margin: 0;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  flex: 1;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1024px) {
+  .pixel-title {
+    font-size: 1.8rem;
+  }
+}
+
+/* ========== SHINY SCORE ========== */
+.shiny-score {
+  font-family: 'Press Start 2P', monospace;
+  color: #FFA500;
+  font-weight: bold;
+  text-shadow: 
+    0 0 10px rgba(255, 165, 0, 0.8),
+    0 0 20px rgba(255, 165, 0, 0.6),
+    0 0 30px rgba(255, 165, 0, 0.4);
+  position: relative;
+  font-size: 2rem;
+  line-height: 1;
+  margin: 0;
+}
+
+/* ========== MAIN GAME CONTENT ========== */
+.game-content {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* ========== DESKTOP LAYOUT ========== */
+.game-layout-desktop {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 48px;
+  padding: 32px 48px;
+  flex-wrap: nowrap;
+}
+
+.game-hint-section {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 380px;
+}
+
+.game-play-section {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 100%;
+}
+
+.game-image-wrapper {
+  flex: 0 0 auto;
+  width: 380px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-controls-wrapper {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+/* ========== MOBILE LAYOUT ========== */
+.game-layout-mobile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  padding: 16px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.game-hint-section-mobile {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.game-image-wrapper-mobile {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.game-controls-wrapper-mobile {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+/* ========== RESPONSIVE BREAKPOINT ========== */
+@media (max-width: 1023px) {
+  .game-layout-desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .game-layout-mobile {
+    display: none;
+  }
+}
+
+/* ========== GAME IMAGE CONTAINER ========== */
+.game-image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #000;
+  border: 8px solid #FFD700;
+  box-shadow: 
+    inset -4px -4px 0 rgba(0, 0, 0, 0.6),
+    inset 4px 4px 0 rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(255, 215, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ========== HINT PANEL ========== */
+.hint-panel {
+  width: 380px;
+  height: 380px;
+  border: 6px solid #FFD700;
+  background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+  box-shadow: 
+    inset -3px -3px 0 rgba(0, 0, 0, 0.8),
+    inset 3px 3px 0 rgba(255, 255, 255, 0.1),
+    0 0 20px rgba(255, 215, 0, 0.4);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.hint-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.hint-panel::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.hint-panel::-webkit-scrollbar-thumb {
+  background: #FFD700;
+  border-radius: 4px;
+}
+
+.hint-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.85rem;
+  color: #00FF00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.hint-text {
+  font-family: 'Press Start 2P', monospace;
+  color: #00FF00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+  line-height: 2;
+  word-wrap: break-word;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 1023px) {
+  .hint-panel {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    min-height: 150px;
+  }
+}
+
+/* ========== RETRO BUTTONS ========== */
+.retro-btn {
+  font-family: 'Press Start 2P', monospace;
+  border: 3px solid;
+  border-style: outset;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  font-weight: bold;
+  position: relative;
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.4),
+              inset -2px -2px 0 rgba(0, 0, 0, 0.4),
+              3px 3px 0 rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+  padding: 14px 20px;
+  white-space: nowrap;
+  border-radius: 0;
+  background-color: #333;
+  color: white;
+  flex-shrink: 0;
+}
+
+.retro-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.6),
+              inset -2px -2px 0 rgba(0, 0, 0, 0.5),
+              5px 5px 0 rgba(0, 0, 0, 0.6);
+}
+
+.retro-btn:active {
+  border-style: inset;
+  box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.4),
+              inset -2px -2px 0 rgba(255, 255, 255, 0.4),
+              1px 1px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(1px);
+}
+
+.retro-btn-red {
+  background-color: #FF3333;
+  border-color: #CC0000;
+  color: white;
+}
+
+.retro-btn-red:hover {
+  background-color: #FF5555;
+}
+
+.retro-btn-blue {
+  background-color: #0099FF;
+  border-color: #0066CC;
+  color: white;
+}
+
+.retro-btn-blue:hover {
+  background-color: #1AAAFF;
+}
+
+.retro-btn-green {
+  background-color: #00FF00;
+  border-color: #00CC00;
+  color: #000;
+  font-weight: bold;
+}
+
+.retro-btn-green:hover {
+  background-color: #33FF33;
+  color: #000;
+}
+
+/* ========== INPUT FIELD ========== */
+.guess-input {
+  background: #000;
+  border: 3px solid #00FF00;
+  color: #00FF00;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1rem;
+  padding: 12px 16px;
+  outline: none;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.6);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+  letter-spacing: 1px;
+  border-radius: 0;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.guess-input:focus {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5),
+              0 0 20px rgba(0, 255, 0, 0.8);
+  border-color: #00FF00;
+}
+
+.guess-input::placeholder {
+  color: rgba(0, 255, 0, 0.5);
+}
+
+/* ========== GUESS FORM ========== */
+form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  form {
+    flex-direction: column;
+  }
+
+  .guess-input {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .retro-btn {
+    padding: 12px 16px;
+    font-size: 0.8rem;
+  }
+}
+
+/* ========== ATTEMPTS COUNTER ========== */
+.attempts-counter {
+  font-size: 0.9rem;
+  font-family: 'Press Start 2P', monospace;
+  color: #FFA500;
+  text-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 300px;
+}
+
+.attempts-text {
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #333;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #FFD700;
+  transition: width 0.3s ease;
+}
+
+.progress-fill.danger {
+  background-color: #FF3333;
+}
+
+/* ========== ANSWER REVEAL ========== */
+.answer-reveal {
+  background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+  border: 4px solid #FFD700;
+  color: #00FF00;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.3rem;
+  padding: 20px 32px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  letter-spacing: 2px;
+  white-space: normal;
+  word-wrap: break-word;
+  flex-shrink: 0;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Keep answer reveal constrained to controls column */
+.answer-reveal {
+  max-width: 380px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+/* Placeholder for guess form to preserve layout when controls are swapped */
+.guess-placeholder {
+  width: 100%;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+/* Ensure controls column reserves vertical space to avoid shifting */
+.game-controls-wrapper {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.game-controls-wrapper-mobile {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.game-play-section {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFD700;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFE520;
+}
+
+
+
