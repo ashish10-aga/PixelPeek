@@ -173,7 +173,7 @@ function GameBoard() {
 
       // Generate first hint asynchronously
       try {
-        const firstHint = await generateHintFromAI(imageData.description, 0, [], category);
+        const firstHint = await generateHintFromAI(imageData.description, 0, [], imageData.description);
         dispatch({ type: GAME_ACTIONS.SET_HINT, payload: "> " + firstHint });
       } catch (e) {
         console.error("Hint generation failed:", e);
